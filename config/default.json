@@ -1,0 +1,11 @@
+{
+  "servicenow": {
+    "url": "https://dev228908.service-now.com",
+    "username": "admin",
+    "password": "aC!zfRWxR^71",
+    "cacheTimeToLiveSeconds": 10,
+    "maxFeaturesToCache": 10000,
+    "idField": null,
+    "trackObjectIds": true
+  }
+}
