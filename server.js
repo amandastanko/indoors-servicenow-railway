@@ -32,6 +32,13 @@ if (process.env.DEPLOY === 'export') {
   // Set port for configuration or fall back to default
   const port = process.env.PORT || config.port || 8080
   koop.server.listen(port)
+  
+  const express = require('express');
+  const app = koop.server; // reuse Koop's server instance
+
+  app.get('/', (req, res) => {
+    res.send('Koop ServiceNow Indoors provider is running!');
+ });
 
   const message = `
 
