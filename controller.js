@@ -25,4 +25,47 @@ function Controller (model) {
   this.model = model
 }
 
-module.exports = Controller
+function getLocations(req, callback) {
+  // Simulated response from ServiceNow cmn_location table
+  const mockServiceNowResponse = [
+    {
+      name: "San Francisco Office",
+      location_id: "LOC001",
+      latitude: 37.7749,
+      longitude: -122.4194
+    },
+    {
+      name: "New York Office",
+      location_id: "LOC002",
+      latitude: 40.7128,
+      longitude: -74.0060
+    }
+  ];
+
+  // Transform the mock response into GeoJSON
+  const geojson = {
+    type: "FeatureCollection",
+    features: mockServiceNowResponse.map(location => ({
+      type: "Feature",
+      geometry: {
+        type: "Point",
+        coordinates: [location.longitude, location.latitude]
+      },
+      properties: {
+        name: location.name,
+        location_id: location.location_id
+      }
+    }))
+  };
+
+  callback(null, geojson);
+}
+
+
+
+module.exports = {
+  getIncidents,
+  getRequests,
+  getLocations
+};
+
