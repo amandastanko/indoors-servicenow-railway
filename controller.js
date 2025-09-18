@@ -20,48 +20,61 @@
 
   Documentation: http://koopjs.github.io/docs/usage/provider
 */
+const axios = require('axios');
+const config = require('config');
 
 function Controller(model) {
   this.model = model;
 }
 
-function getLocations(req, callback) {
-  // Simulated response from ServiceNow cmn_location table
-  const mockServiceNowResponse = [
-    {
-      name: "San Francisco Office",
-      location_id: "LOC001",
-      latitude: 37.7749,
-      longitude: -122.4194
-    },
-    {
-      name: "New York Office",
-      location_id: "LOC002",
-      latitude: 40.7128,
-      longitude: -74.0060
-    }
-  ];
+async function getLocations(req, callback) {
+  try {
+    const instanceUrl = config.get('servicenow.url'); // from default.json
+    const username = config.get('servicenow.username');
+    const password = config.get('servicenow.password');
 
-  // Transform the mock response into GeoJSON
-  const geojson = {
-    type: "FeatureCollection",
-    features: mockServiceNowResponse.map(location => ({
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [location.longitude, location.latitude]
+    const response = await axios.get(`${instanceUrl}/api/now/table/cmn_location`, {
+      auth: {
+        username,
+        password
       },
-      properties: {
-        name: location.name,
-        location_id: location.location_id
+      headers: {
+        'Accept': 'application/json'
+      },
+      params: {
+        sysparm_fields: 'name,sys_id,latitude,longitude',
+        sysparm_limit: 100
       }
-    }))
-  };
+    });
 
-  callback(null, geojson);
+    const locations = response.data.result;
+
+    const geojson = {
+      type: 'FeatureCollection',
+      features: locations.map(location => ({
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [
+            parseFloat(location.longitude),
+            parseFloat(location.latitude)
+          ]
+        },
+        properties: {
+          name: location.name,
+          location_id: location.sys_id
+        }
+      }))
+    };
+
+    callback(null, geojson);
+  } catch (error) {
+    console.error('Error fetching ServiceNow data:', error.message);
+    callback(error);
+  }
 }
 
-// Export only the function(s) you've implemented
 module.exports = {
   getLocations
 };
+
