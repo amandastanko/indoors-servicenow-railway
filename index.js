@@ -23,6 +23,11 @@
 // Define the provider path
 // /:name/:hosts?/:disableIdParam?/FeatureServer/:layer/:method
 // e.g. /sample/FeatureServer/0/query
+
+console.log('Model type:', typeof require('./model'));        // should be function
+console.log('Controller type:', typeof require('./controller')); // should be object
+console.log('Routes type:', typeof require('./routes/index'));  // should be object or array
+
 const provider = {
   type: 'provider',
   name: 'ServiceNow',
