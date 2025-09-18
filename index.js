@@ -30,7 +30,7 @@ const provider = {
   disableIdParam: false, // if true, adds to path and req.params
   Controller: require('./controller'),
   Model: require('./model'),
-  routes: require('./routes'),
+  routes: require('./routes/index'),
   version: require('./package.json').version
 }
 
