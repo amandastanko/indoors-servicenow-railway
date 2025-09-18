@@ -21,8 +21,8 @@
   Documentation: http://koopjs.github.io/docs/usage/provider
 */
 
-function Controller (model) {
-  this.model = model
+function Controller(model) {
+  this.model = model;
 }
 
 function getLocations(req, callback) {
@@ -61,11 +61,7 @@ function getLocations(req, callback) {
   callback(null, geojson);
 }
 
-
-
+// Export only the function(s) you've implemented
 module.exports = {
-  getIncidents,
-  getRequests,
   getLocations
 };
-
