@@ -26,7 +26,7 @@
 
 console.log('Model type:', typeof require('./model'));        // should be function
 console.log('Controller type:', typeof require('./controller')); // should be object
-console.log('Routes type:', typeof require('./routes/index'));  // should be object or array
+console.log('Routes type:', typeof require('./routes'));  // should be object or array
 
 const provider = {
   type: 'provider',
