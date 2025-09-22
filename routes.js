@@ -13,16 +13,9 @@
  * limitations under the License.
  */
 /*
-  controller.js
+  routes.js
 
-  This file is not required unless additional routes specified in routes.js
-  If so, corresponding functions must be written to match those routes.
-
+  This file is an optional place to specify additional routes to be handled by this provider's controller
   Documentation: http://koopjs.github.io/docs/usage/provider
 */
-
-function Controller(model) {
-  this.model = model;
-}
-
-module.exports = Controller
+module.exports = []
