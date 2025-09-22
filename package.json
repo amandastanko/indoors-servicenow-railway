@@ -4,24 +4,27 @@
   "description": "A ServiceNow provider for Koop",
   "main": "index.js",
   "license": "Apache-2.0",
-  "homepage": "https://github.com/Esri/indoors-servicenow-feature-service",
+  "homepage": "https://github.com/amandastanko/indoors-servicenow-railway",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Esri/indoors-servicenow-feature-service.git"
+    "url": "git+https://github.com/amandastanko/indoors-servicenow-railway.git"
   },
   "bugs": {
-    "url": "https://github.com/Esri/indoors-servicenow-feature-service/issues"
+    "url": "https://github.com/amandastanko/indoors-servicenow-railway/issues"
   },
   "keywords": [
     "indoors",
     "koop",
     "provider",
-    "ServiceNow"
+    "ServiceNow",
+    "Railway",
+    "ArcGIS"
   ],
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
+    "axios": "^1.6.7",
     "config": "^3.0.0",
     "koop": "^3.10.1",
     "request": "^2.79.0"
